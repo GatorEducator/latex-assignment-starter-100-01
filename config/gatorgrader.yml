@@ -1,0 +1,22 @@
+---
+name: latex=assignment-solution
+break: true
+fastfail: false
+indent: 4
+---
+src/main/latex/samplelab:
+    example.tex:
+        ConfirmFileExists
+        MatchFileFragment --fragment "\section" --count 3
+        MatchFileFragment --fragment "\paragraph" --count 2
+        MatchFileFragment --fragment "\LaTeXe{}" --count 1
+        MatchFileFragment --fragment "\bibliography{main}" --count 1
+    sample.bib:
+        ConfirmFileExists
+        MatchFileFragment --fragment "@article" --count 1
+        MatchFileFragment --fragment "@InProceedings" --count 1
+
+CountCommits --count 10
+
+# if you wish to specify an exact gatorgrader command... must include --json
+# gg: --directory src/main/java/samplelab --file SampleLabMain.java --exists --json
